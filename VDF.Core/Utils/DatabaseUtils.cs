@@ -94,7 +94,7 @@ namespace VDF.Core.Utils {
 			var st = Stopwatch.StartNew();
 
 			Database.RemoveWhere(a => a.Path == null || !File.Exists(a.Path) || a.Flags.Any(EntryFlags.MetadataError | EntryFlags.ThumbnailError) ||
-				Path.GetFileName(Directory.GetFiles(Path.GetDirectoryName(a.Path),Path.GetFileName(a.Path)).First())!=Path.GetFileName(a.Path));
+				Path.GetFileName(Directory.GetFiles(Path.GetDirectoryName(a.Path),Path.GetFileName(a.Path)).FirstOrDefault())!=Path.GetFileName(a.Path));
 
 			st.Stop();
 			Logger.Instance.Info(
