@@ -20,9 +20,15 @@ namespace VDF.Core.Utils {
 	public static class CoreUtils {
 		public static bool IsWindows;
 		public static string CurrentFolder;
+		public static StringComparison Comparison;
 		static CoreUtils() {
 			IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 			CurrentFolder = Path.GetDirectoryName(typeof(CoreUtils).Assembly.Location)!;
+			if (IsWindows) {
+				Comparison = StringComparison.OrdinalIgnoreCase;
+			} else {
+				Comparison = StringComparison.Ordinal;
+			}
 		}
 	}
 }

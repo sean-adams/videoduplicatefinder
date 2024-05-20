@@ -105,9 +105,7 @@ namespace VDF.Core {
 
 		public override bool Equals(object? obj) =>
 			obj is FileEntry entry &&
-			Path.Equals(entry.Path, CoreUtils.IsWindows ?
-				StringComparison.OrdinalIgnoreCase :
-				StringComparison.Ordinal);
+			Path.Equals(entry.Path, CoreUtils.Comparison);
 
 		public override int GetHashCode() => CoreUtils.IsWindows ?
 			StringComparer.OrdinalIgnoreCase.GetHashCode(Path) :

@@ -55,6 +55,14 @@ Video Duplicate Finder is licensed under GPLv3
 - .NET 7.x
 - Visual Studio 2022 is recommended
 
+# Building on Mac (ARM)
+
+`dotnet publish -c Release -v q -r osx-arm64 -o "./outputFolder/VDF.MacOS-arm64"`
+
+# Building on Mac (Intel)
+
+`dotnet publish -c Release -v q -r osx-x64 -o "./outputFolder/VDF.MacOS-x64"`
+
 # Committing
 - Create a pull request for each addition or fix - do NOT merge them into one PR
 - Unless it refers to an existing issue, write into your pull request what it does
