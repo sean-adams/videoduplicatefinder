@@ -15,6 +15,7 @@
 //
 
 using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 using ProtoBuf;
 
@@ -92,7 +93,8 @@ namespace VDF.Core.Utils {
 			int oldCount = Database.Count;
 			var st = Stopwatch.StartNew();
 
-			Database.RemoveWhere(a => !File.Exists(a.Path) || a.Flags.Any(EntryFlags.MetadataError | EntryFlags.ThumbnailError));
+			Database.RemoveWhere(a => a.Path == null || !File.Exists(a.Path) || a.Flags.Any(EntryFlags.MetadataError | EntryFlags.ThumbnailError) ||
+				Path.GetFileName(Directory.GetFiles(Path.GetDirectoryName(a.Path),Path.GetFileName(a.Path)).First())!=Path.GetFileName(a.Path));
 
 			st.Stop();
 			Logger.Instance.Info(
