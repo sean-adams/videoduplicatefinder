@@ -17,6 +17,7 @@
 using System.Linq;
 using Avalonia.Collections;
 using ReactiveUI;
+using VDF.Core.Utils;
 using VDF.GUI.Data;
 
 namespace VDF.GUI.ViewModels {
@@ -131,12 +132,12 @@ namespace VDF.GUI.ViewModels {
 			if (obj is not DuplicateItemVM data) return false;
 			var success = true;
 			if (!string.IsNullOrEmpty(FilterByPath)) {
-				success = data.ItemInfo.Path.Contains(FilterByPath, StringComparison.OrdinalIgnoreCase);
+				success = data.ItemInfo.Path.Contains(FilterByPath, CoreUtils.Comparison);
 				//see if a group member matches, then this should be considered as match too
 				if (!success)
 					success = Duplicates.Any(s =>
 						s.ItemInfo.GroupId == data.ItemInfo.GroupId &&
-						s.ItemInfo.Path.Contains(FilterByPath, StringComparison.OrdinalIgnoreCase));
+						s.ItemInfo.Path.Contains(FilterByPath, CoreUtils.Comparison));
 			}
 			if (success && FileType.Value != FileTypeFilter.All)
 				success = FileType.Value == FileTypeFilter.Images ? data.ItemInfo.IsImage : !data.ItemInfo.IsImage;
