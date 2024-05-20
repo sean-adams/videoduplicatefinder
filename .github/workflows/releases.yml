@@ -1,7 +1,7 @@
 name: Build releases
 
 
-on: [push]
+on: []
     
 jobs:
   build:
