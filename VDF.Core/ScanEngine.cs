@@ -258,7 +258,7 @@ namespace VDF.Core {
 
 			if (entry.Flags.Any(EntryFlags.ManuallyExcluded | EntryFlags.TooDark))
 				return true;
-			if (!Settings.IncludeNonExistingFiles && Path.GetFileName(Directory.GetFiles(Path.GetDirectoryName(entry.Path),Path.GetFileName(entry.Path)).FirstOrDefault())!=Path.GetFileName(entry.Path))
+			if (!Settings.IncludeNonExistingFiles && !!File.Exists(entry.Path) && Path.GetFileName(Directory.GetFiles(Path.GetDirectoryName(entry.Path),Path.GetFileName(entry.Path)).FirstOrDefault())!=Path.GetFileName(entry.Path))
 				return true;
 
 			if (Settings.FilterByFileSize && (entry.FileSize.BytesToMegaBytes() > Settings.MaximumFileSize ||
